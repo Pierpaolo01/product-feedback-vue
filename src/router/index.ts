@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import LoginOrSignup from '@/pages/LoginOrSignUp/LoginOrSignup.vue'
 import SuggestionsPage from '@/pages/Suggestions/SuggestionsPage.vue'
+import AuthStore from '@/store/modules/AuthStore'
 
 Vue.use(VueRouter)
 
@@ -36,7 +37,7 @@ const router = new VueRouter({
 
 // eslint-disable-next-line no-use-before-define
 router.beforeEach((to, from, next) => {
-  const authenticatedUser = false
+  const authenticatedUser = AuthStore.getAuthenticatedUser
   const requiresAuthentication = to.matched.some((route) => route.meta.requiresAuth)
 
   if (requiresAuthentication && !authenticatedUser) next('/authenticate')

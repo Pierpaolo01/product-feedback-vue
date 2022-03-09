@@ -1,4 +1,4 @@
-import { getModule, Module, VuexModule } from 'vuex-module-decorators'
+import { getModule, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import store from '@/store'
 
 @Module({
@@ -10,6 +10,25 @@ import store from '@/store'
 class AuthStore extends VuexModule {
   // TODO set user TYPE
   public authenticatedUser: any | null = null;
+  public authenticatedUserToken: string | null = null;
+
+  get getAuthenticatedUser (): any {
+    return this.authenticatedUser
+  }
+  // TODO once backend is running
+  // get getAuthenticatedUserToken (): string | null {
+  //   return this.getAuthenticatedUserToken
+  // }
+
+  @Mutation
+  setAuthenticatedUser (user: any) {
+    this.authenticatedUser = user
+  }
+
+  @Mutation
+  setAuthenticatedUserToken (accessToken: string) {
+    this.authenticatedUserToken = accessToken
+  }
 }
 
 export default getModule(AuthStore)
