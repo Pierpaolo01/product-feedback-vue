@@ -9,7 +9,7 @@ import store from '@/store'
 })
 class AuthStore extends VuexModule {
   // TODO set user TYPE
-  public authenticatedUser: any | null = null;
+  public authenticatedUser: any | null = true;
   public authenticatedUserToken: string | null = null;
 
   get getAuthenticatedUser (): any {
