@@ -15,10 +15,10 @@ class AuthStore extends VuexModule {
   get getAuthenticatedUser (): any {
     return this.authenticatedUser
   }
-  // TODO once backend is running
-  // get getAuthenticatedUserToken (): string | null {
-  //   return this.getAuthenticatedUserToken
-  // }
+
+  get getAuthenticatedUserToken (): string | null {
+    return this.authenticatedUserToken
+  }
 
   @Mutation
   setAuthenticatedUser (user: any) {

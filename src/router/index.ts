@@ -35,12 +35,11 @@ const router = new VueRouter({
   routes
 })
 
-// eslint-disable-next-line no-use-before-define
 router.beforeEach((to, from, next) => {
-  const authenticatedUser = AuthStore.getAuthenticatedUser
-  const requiresAuthentication = to.matched.some((route) => route.meta.requiresAuth)
+  const authenticatedUser = AuthStore.getAuthenticatedUserToken
+  const requiresAuthentication = to.matched.some((match) => match.meta.requiresAuth)
 
-  if (requiresAuthentication && !authenticatedUser) next('/authenticate')
+  if (!authenticatedUser && requiresAuthentication) next({ name: 'auth' })
 
   next()
 })

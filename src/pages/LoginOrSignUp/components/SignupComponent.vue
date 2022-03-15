@@ -94,11 +94,11 @@
 
 <script lang="ts">
 import { Component, Emit, Vue } from 'vue-property-decorator'
-import { UserSignup } from '@/types/UserSignup'
+import { UserCredentials } from '@/types/userCredentials'
 import AuthService from '@/services/authService'
 @Component
 export default class SignupComponent extends Vue {
-  public signupForm: UserSignup = {
+  public signupForm: UserCredentials = {
     name: '',
     email: '',
     password: ''
@@ -106,7 +106,7 @@ export default class SignupComponent extends Vue {
 
   public async signup (): Promise<void> {
     try {
-      await AuthService.authenticateUser(this.signupForm)
+      await AuthService.signupUser(this.signupForm)
       this.signedUp()
     } finally {}
   }
