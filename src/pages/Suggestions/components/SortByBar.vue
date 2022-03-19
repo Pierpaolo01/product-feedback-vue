@@ -1,5 +1,5 @@
 <template>
-<div class="py-4 px-6 bg-my-meteorite">
+<div class="py-4 px-6 bg-my-meteorite md:rounded-lg">
   <div class="flex justify-between items-center">
     <!--TODO total suggestions on bigger screens-->
     <span class="text-white text-lg">
