@@ -1,5 +1,5 @@
 <template>
-  <button class="rounded-lg " :class="{color, size}">
+  <button class="rounded-lg " :class="size">
     {{text}}
   </button>
 </template>
@@ -9,7 +9,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class MyButton extends Vue {
   @Prop() readonly text!: string;
-  @Prop() readonly color!: string;
+  @Prop() readonly color!: 'blue';
   @Prop({ default: () => 'normal' }) readonly size!: 'small' | 'normal' | 'large';
 }
 </script>

@@ -1,8 +1,8 @@
 <template>
-<div class="h-header bg-indigo-500 px-2 py-4  w-full flex justify-between">
+<div class="bg-indigo-500 px-2 py-4  w-full flex justify-between">
   <div class="flex flex-col justify-start text-left text-sm text-white">
-    <h2 class="font-bold">{{title}}</h2>
-    <h4>{{subTitle}}</h4>
+    <h2 class="font-bold text-2xl">{{title}}</h2>
+    <h4 class="text-lg">{{subTitle}}</h4>
   </div>
   <div class="self-center">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="white">

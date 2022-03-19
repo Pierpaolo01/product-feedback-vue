@@ -1,12 +1,14 @@
 <template>
-<div class="py-2 px-6 bg-my-meteorite">
-  <div>
+<div class="py-4 px-6 bg-my-meteorite">
+  <div class="flex justify-between items-center">
     <!--TODO total suggestions on bigger screens-->
-    <span class="text-white">
-      sort by : <span class="font-bold">OPTION</span>
+    <span class="text-white text-lg">
+      sort by :
+      <span class="font-bold">TODO</span>
     </span>
 
-    <MyButton text="+ Add Feedback" color="bg-my-blue"/>
+    <MyButton text="+ Add Feedback" class="bg-my-blue text-white font-bold"/>
+
   </div>
 </div>
 </template>
