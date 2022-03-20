@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white p-4 w-full md:rounded-lg md:h-48 md:w-52">
+  <div class="bg-white p-4 w-full md:rounded-lg md:h-48 md:w-56">
     <div class="flex justify-between pb-8">
       <h1 class="font-bold text-lg">
         Roadmap

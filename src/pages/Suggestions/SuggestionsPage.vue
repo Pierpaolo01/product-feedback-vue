@@ -1,14 +1,17 @@
 <template>
-<div class="md:p-8 md:space-y-6">
-  <div class="md:pb-2 flex justify-between">
+<div class="md:p-8 md:space-y-6 lg:space-y-0 lg:space-x-6 lg:flex lg:justify-between max-w-7xl mx-auto">
+  <div class="md:pb-2 flex justify-between lg:flex-col lg:space-y-6">
     <HeaderComponent :title="'Feedback Board'" subTitle="Pierpaolo Pascarella"/>
     <FilterComponent class="hidden md:flex" />
     <RoadmapComponent class="hidden md:block"/>
   </div>
-  <SortByBar />
-  <div class="p-8 md:p-0">
-    <SuggestionItem />
+  <div class="space-y-6 flex-1">
+    <SortByBar />
+    <div class="p-8 md:p-0">
+      <SuggestionItem />
+    </div>
   </div>
+
 </div>
 </template>
 
