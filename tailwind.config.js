@@ -14,7 +14,7 @@ module.exports = {
         'light-blue': '#62BCFA'
       },
       height: {
-        header: '72px'
+        header: '90px'
       }
     }
 
