@@ -27,7 +27,10 @@ const routes: Array<RouteConfig> = [
   {
     path: '/create-suggestion',
     name: 'create-suggestion',
-    component: CreateSuggestion
+    component: CreateSuggestion,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '*',
