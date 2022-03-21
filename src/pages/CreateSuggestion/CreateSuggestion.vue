@@ -56,9 +56,9 @@ export default class CreateSuggestion extends Vue {
 
       this.$notify({
         type: 'success',
-        text: 'Successfully added suggestion',
-        duration: 4000
+        text: 'Successfully added suggestion'
       })
+      await this.$router.push({ name: 'suggestions-page' })
     } catch (err) {}
   }
 }
