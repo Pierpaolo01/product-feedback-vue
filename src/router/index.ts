@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router'
 import LoginOrSignup from '@/pages/LoginOrSignUp/LoginOrSignup.vue'
 import SuggestionsPage from '@/pages/Suggestions/SuggestionsPage.vue'
 import AuthStore from '@/store/modules/AuthStore'
+import CreateSuggestion from '@/pages/CreateSuggestion/CreateSuggestion.vue'
 
 Vue.use(VueRouter)
 
@@ -25,8 +26,8 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/create-suggestion',
-    name: 'create-suggestion'
-    // component: TODO
+    name: 'create-suggestion',
+    component: CreateSuggestion
   },
   {
     path: '*',
