@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="h-full bg-light-gray">
-    <router-view/>
+  <div id="app" class="h-full">
+    <router-view class="bg-light-gray"/>
     <notifications
       width="448px"
       :duration="2000"
