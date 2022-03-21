@@ -27,10 +27,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Suggestion } from '@/types/suggestion'
 @Component
 export default class SuggestionItem extends Vue {
-
+  @Prop() readonly suggestion!: Suggestion;
 }
 </script>
 
