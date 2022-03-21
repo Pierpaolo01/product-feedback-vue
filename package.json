@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "startDev": "vue-cli-service serve --port=5000 --mode=local",
+    "startdev": "vue-cli-service serve --port=5000 --mode=local",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },

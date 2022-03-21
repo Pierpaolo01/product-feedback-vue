@@ -9,4 +9,8 @@ export default class AuthService {
   public static authenticateUser (payload: UserCredentials):AxiosPromise<string> {
     return axios.post('/login', payload)
   }
+
+  public static testRoute () {
+    //
+  }
 }
