@@ -24,6 +24,11 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
+    path: '/create-suggestion',
+    name: 'create-suggestion'
+    // component: TODO
+  },
+  {
     path: '*',
     redirect: { name: 'auth' }
   }
