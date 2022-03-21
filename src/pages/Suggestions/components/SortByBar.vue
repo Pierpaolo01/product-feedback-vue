@@ -16,8 +16,9 @@
           sort by : <span class="font-bold">TODO</span>
       </span>
     </div>
-
-    <MyButton text="+ Add Feedback" class="bg-my-blue text-white font-bold"/>
+    <router-link :to="{name: 'create-suggestion'}">
+      <MyButton text="+ Add Feedback" class="bg-my-blue text-white font-bold"/>
+    </router-link>
 
   </div>
 </div>
