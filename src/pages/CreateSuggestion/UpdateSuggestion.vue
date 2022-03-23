@@ -33,10 +33,10 @@
         </div>
       </div>
       <div class="flex justify-between">
-        <button class="p-2 text-white text-white self-start rounded-lg bg-red-600">DELETE</button>
+        <button type="button" class="p-2 text-white text-white self-start rounded-lg bg-red-600" @click="deleteSuggestion">DELETE</button>
         <div>
           <router-link :to="{name: 'suggestions-page'}" class="p-2 mr-4 text-white rounded-lg bg-my-meteorite">Cancel</router-link>
-          <button class="p-2 text-white rounded-lg bg-my-blue">Upadte suggestion</button>
+          <button type="submit" class="p-2 text-white rounded-lg bg-my-blue">Upadte suggestion</button>
         </div>
 
       </div>
@@ -74,6 +74,16 @@ export default class UpdateSuggestion extends Vue {
       })
       await this.$router.push({ name: 'suggestions-page' })
     } catch (err) {}
+  }
+
+  public async deleteSuggestion (): Promise<void> {
+    if (!this.suggestion) return
+
+    try {
+      await SuggestionService.deleteSuggestion(this.suggestion?.id)
+      await this.$router.push({ name: 'suggestions-page' })
+    } finally {
+    }
   }
 }
 </script>

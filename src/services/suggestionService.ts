@@ -18,4 +18,8 @@ export default class SuggestionService {
   public static updateSuggestion (suggestion: Suggestion): AxiosPromise {
     return axios.patch(`/api/suggestion/${suggestion.id}`, suggestion)
   }
+
+  public static deleteSuggestion (id: number): AxiosPromise {
+    return axios.delete(`/api/suggestion/${id}`)
+  }
 }
