@@ -57,7 +57,7 @@ export default class CreateSuggestion extends Vue {
 
   public async submitSuggestion (): Promise<void> {
     try {
-      SuggestionService.createSuggestion(this.createSuggestionForm)
+      await SuggestionService.createSuggestion(this.createSuggestionForm)
 
       this.$notify({
         type: 'success',
