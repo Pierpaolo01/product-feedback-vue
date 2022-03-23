@@ -9,7 +9,7 @@ export default class SuggestionService {
     })
   }
 
-  public static getSuggestion (id: string | number):AxiosPromise<Suggestion[]> {
+  public static getSuggestion (id: string | number):AxiosPromise<Suggestion> {
     return axios.get(`api/suggestions/${id}`)
   }
 

@@ -22,7 +22,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import HeaderComponent from '@/pages/Suggestions/components/HeaderComponent.vue'
 import SortByBar from '@/pages/Suggestions/components/SortByBar.vue'
 
-import SuggestionItem from '@/pages/Suggestions/components/SuggestionItem.vue'
+import SuggestionItem from '@/components/SuggestionItem.vue'
 import FilterComponent from '@/pages/Suggestions/components/FilterComponent.vue'
 import RoadmapComponent from '@/pages/Suggestions/components/RoadmapComponent.vue'
 import SuggestionService from '@/services/suggestionService'

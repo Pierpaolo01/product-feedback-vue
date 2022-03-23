@@ -1,6 +1,5 @@
 <template>
-  <router-link :to="{name: 'update-suggestion', params: {suggestion_id: suggestion.id}}">
-    <div class="grid grid-cols-2 md:grid-cols-6 p-4 bg-white rounded-lg">
+    <div class="grid grid-cols-2 md:grid-cols-6 p-4 bg-white items-center rounded-lg cursor-pointer" @click="$router.push({name: 'comments', params: {id: suggestion.id}})">
       <div class="col-span-2 md:col-span-4 flex flex-col items-start space-y-2">
         <h1 class="font-bold text-lg mb-2">{{suggestion.title}}</h1>
         <p>{{suggestion.description}}</p>
@@ -25,7 +24,6 @@
     </span>
       </div>
     </div>
-  </router-link>
 </template>
 
 <script lang="ts">

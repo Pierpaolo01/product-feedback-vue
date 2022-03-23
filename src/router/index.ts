@@ -5,6 +5,7 @@ import SuggestionsPage from '@/pages/Suggestions/SuggestionsPage.vue'
 import AuthStore from '@/store/modules/AuthStore'
 import CreateSuggestion from '@/pages/CreateSuggestion/CreateSuggestion.vue'
 import UpdateSuggestion from '@/pages/CreateSuggestion/UpdateSuggestion.vue'
+import CommentsPage from '@/pages/Comments/CommentsPage.vue'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,11 @@ const routes: Array<RouteConfig> = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: 'comments/:id',
+    name: 'comments',
+    component: CommentsPage
   },
   {
     path: 'update/:suggestion_id',
