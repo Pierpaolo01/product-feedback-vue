@@ -1,8 +1,8 @@
 <template>
-<div class="md:p-8 md:space-y-6 lg:space-y-0 lg:space-x-6 lg:flex lg:justify-between max-w-7xl mx-auto">
+<div v-if="suggestions" class="md:p-8 md:space-y-6 lg:space-y-0 lg:space-x-6 lg:flex lg:justify-between max-w-7xl mx-auto">
   <div class="md:pb-2 flex justify-between lg:block lg:space-y-6 lg:max-h-screen">
     <HeaderComponent :title="'Feedback Board'" subTitle="Pierpaolo Pascarella"/>
-    <FilterComponent class="hidden md:flex" />
+    <FilterComponent class="hidden md:flex" @filtered="fetchAllSuggestions"/>
     <RoadmapComponent class="hidden md:block"/>
   </div>
   <div class="space-y-6 flex-1">
@@ -43,9 +43,9 @@ export default class SuggestionsPage extends Vue {
     this.fetchAllSuggestions()
   }
 
-  public async fetchAllSuggestions (): Promise<void> {
+  public async fetchAllSuggestions (filter = ''): Promise<void> {
     try {
-      const response = await SuggestionService.getAllSuggestions()
+      const response = await SuggestionService.getAllSuggestions(filter)
       this.suggestions = response.data
     } catch (err) {}
   }
