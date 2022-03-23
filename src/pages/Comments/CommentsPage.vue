@@ -12,7 +12,7 @@
       </router-link>
     </header>
     <SuggestionItem :suggestion="suggestion"/>
-
+    <PostComment />
   </div>
 </template>
 
@@ -22,9 +22,10 @@ import MyButton from '@/components/MyButton.vue'
 import SuggestionItem from '@/components/SuggestionItem.vue'
 import { Suggestion } from '@/types/suggestion'
 import SuggestionService from '@/services/suggestionService'
+import PostComment from '@/pages/Comments/componets/PostComment.vue'
 
 @Component({
-  components: { SuggestionItem, MyButton }
+  components: { PostComment, SuggestionItem, MyButton }
 })
 export default class CommentsPage extends Vue {
   public suggestion: Suggestion | null = null
