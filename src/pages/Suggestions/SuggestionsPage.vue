@@ -6,7 +6,9 @@
     <RoadmapComponent class="hidden md:block"/>
   </div>
   <div class="space-y-6 flex-1">
-    <SortByBar />
+    <SortByBar
+      :suggestions-count="suggestions.length"
+    />
     <div class="p-8 md:p-0 space-y-6">
       <SuggestionItem v-for="suggestion in suggestions" :key="suggestion.id" :suggestion="suggestion"/>
     </div>

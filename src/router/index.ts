@@ -4,6 +4,7 @@ import LoginOrSignup from '@/pages/LoginOrSignUp/LoginOrSignup.vue'
 import SuggestionsPage from '@/pages/Suggestions/SuggestionsPage.vue'
 import AuthStore from '@/store/modules/AuthStore'
 import CreateSuggestion from '@/pages/CreateSuggestion/CreateSuggestion.vue'
+import UpdateSuggestion from '@/pages/CreateSuggestion/UpdateSuggestion.vue'
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,11 @@ const routes: Array<RouteConfig> = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: 'update/:suggestion_id',
+    name: 'update-suggestion',
+    component: UpdateSuggestion
   },
   {
     path: '/create-suggestion',

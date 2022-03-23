@@ -7,7 +7,19 @@ export default class SuggestionService {
     return axios.get('api/suggestions')
   }
 
+  public static getSuggestion (id: string | number):AxiosPromise<Suggestion> {
+    return axios.get(`api/suggestions/${id}`)
+  }
+
   public static createSuggestion (suggestion: CreateSuggestionForm): AxiosPromise {
     return axios.post('/api/create-suggestion', suggestion)
+  }
+
+  public static updateSuggestion (suggestion: Suggestion): AxiosPromise {
+    return axios.patch(`/api/suggestion/${suggestion.id}`, suggestion)
+  }
+
+  public static deleteSuggestion (id: number): AxiosPromise {
+    return axios.delete(`/api/suggestion/${id}`)
   }
 }
