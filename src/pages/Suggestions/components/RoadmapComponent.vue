@@ -4,9 +4,10 @@
       <h1 class="font-bold text-lg">
         Roadmap
       </h1>
-      <router-link class="underline text-my-blue" :to="{name: 'roadmap'}">
-        View
-      </router-link>
+<!--      TODO-->
+<!--      <router-link class="underline text-my-blue" :to="{name: 'roadmap'}">-->
+<!--        View-->
+<!--      </router-link>-->
     </div>
     <ul class="">
       <li class="marker:text-my-blue flex justify-between items-center">

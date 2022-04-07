@@ -10,7 +10,8 @@ export default class SuggestionService {
   }
 
   public static getSuggestion (id: string | number):AxiosPromise<Suggestion> {
-    return axios.get(`api/suggestions/${id}`)
+    console.log(id)
+    return axios.get(`/api/suggestion/${id}`)
   }
 
   public static createSuggestion (suggestion: CreateSuggestionForm): AxiosPromise<Suggestion> {

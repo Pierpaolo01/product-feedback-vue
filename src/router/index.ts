@@ -27,14 +27,20 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: 'comments/:id',
+    path: '/suggestion/:suggestion_id',
     name: 'comments',
-    component: CommentsPage
+    component: CommentsPage,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
-    path: 'update/:suggestion_id',
+    path: '/update/:suggestion_id',
     name: 'update-suggestion',
-    component: UpdateSuggestion
+    component: UpdateSuggestion,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/create-suggestion',

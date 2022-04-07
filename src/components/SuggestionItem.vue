@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-2 md:grid-cols-6 p-4 bg-white items-center rounded-lg cursor-pointer" @click="$router.push({name: 'comments', params: {id: suggestion.id}})">
+    <div class="grid grid-cols-2 md:grid-cols-6 p-4 bg-white items-center rounded-lg cursor-pointer" @click="navigate">
       <div class="col-span-2 md:col-span-4 flex flex-col items-start space-y-2">
         <h1 class="font-bold text-lg mb-2">{{suggestion.title}}</h1>
         <p>{{suggestion.description}}</p>
@@ -29,9 +29,16 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { Suggestion } from '@/types/suggestion'
+
 @Component
 export default class SuggestionItem extends Vue {
   @Prop() readonly suggestion!: Suggestion;
+  @Prop( { default: () => true } ) readonly hasRoute!: boolean;
+
+  public navigate (): void {
+    if (!this.hasRoute) return;
+    this.$router.push( { name: 'comments', params: { suggestion_id: String(this.suggestion.id) } } )
+  }
 }
 </script>
 

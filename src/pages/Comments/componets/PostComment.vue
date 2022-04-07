@@ -5,7 +5,7 @@
       <img class="inline-block h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
     </div>
     <div class="min-w-0 flex-1">
-      <form class="relative" @submit.prevent>
+      <form class="relative" @submit.prevent="submitComment">
         <div class="border border-gray-300 rounded-lg shadow-sm overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
           <label class="sr-only">Add your comment</label>
           <textarea rows="3" v-model="comment" class="block w-full py-3 border-0 resize-none focus:ring-0 sm:text-sm" placeholder="Add your comment..."></textarea>
@@ -187,6 +187,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import CommentsService from '@/services/CommentsService'
 
 @Component
 export default class PostComment extends Vue {
@@ -197,7 +198,13 @@ export default class PostComment extends Vue {
   }
 
   public async submitComment (): Promise<void> {
-  //  TODO
+    try {
+      const response = await CommentsService.createSuggestionComment(this.$route.params.suggestion_id, this.comment)
+      await this.getComments()
+      console.log({ data: response.data })
+    } catch (e) {
+      console.log({ e })
+    }
   }
 
   public async deleteComment (): Promise<void> {
