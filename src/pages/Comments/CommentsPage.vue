@@ -24,15 +24,19 @@ import SuggestionItem from '@/components/SuggestionItem.vue'
 import { Suggestion } from '@/types/suggestion'
 import SuggestionService from '@/services/suggestionService'
 import PostComment from '@/pages/Comments/componets/PostComment.vue'
+import CommentsService from '@/services/CommentsService'
 
 @Component({
   components: { PostComment, SuggestionItem, MyButton }
 })
 export default class CommentsPage extends Vue {
+  public suggestionComments = [];
+
   public suggestion: Suggestion | null = null
 
   public created (): void {
     this.getSuggestion()
+    this.getComments()
   }
 
   public async getSuggestion (): Promise<void> {
@@ -41,6 +45,15 @@ export default class CommentsPage extends Vue {
       this.suggestion = response.data
     } catch (e) {
       console.log(e)
+    }
+  }
+
+  public async getComments (): Promise<void> {
+    try {
+      const response = await CommentsService.getAllSuggestionComments(this.$route.params.suggestion_id)
+      this.suggestionComments = response.data
+    } catch (e) {
+      console.log({ e })
     }
   }
 }

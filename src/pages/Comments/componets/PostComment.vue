@@ -193,14 +193,9 @@ import CommentsService from '@/services/CommentsService'
 export default class PostComment extends Vue {
   public comment = ''
 
-  public async getComments (): Promise<void> {
-    //  TODO
-  }
-
   public async submitComment (): Promise<void> {
     try {
       const response = await CommentsService.createSuggestionComment(this.$route.params.suggestion_id, this.comment)
-      await this.getComments()
       console.log({ data: response.data })
     } catch (e) {
       console.log({ e })
