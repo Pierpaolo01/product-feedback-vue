@@ -15,7 +15,8 @@ axios.defaults.headers.common.Authorization = 'Bearer '
 
 axios.interceptors.request.use((req) => {
   // @ts-ignore
-  const { token } = authStore.authenticatedUserToken
+  const token = localStorage.getItem('token')
+  console.log(token)
   // @ts-ignore
   req.headers.Authorization = 'Bearer ' + token
   return req

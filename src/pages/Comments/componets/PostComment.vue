@@ -186,7 +186,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Emit } from 'vue-property-decorator'
 import CommentsService from '@/services/CommentsService'
 
 @Component
@@ -195,15 +195,16 @@ export default class PostComment extends Vue {
 
   public async submitComment (): Promise<void> {
     try {
-      const response = await CommentsService.createSuggestionComment(this.$route.params.suggestion_id, this.comment)
-      console.log({ data: response.data })
+      await CommentsService.createSuggestionComment(this.$route.params.suggestion_id, this.comment)
+      this.refreshComments()
     } catch (e) {
       console.log({ e })
     }
   }
 
-  public async deleteComment (): Promise<void> {
-    //  TODO
+  @Emit()
+  public refreshComments (): void {
+    //
   }
 }
 </script>

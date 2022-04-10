@@ -1,19 +1,21 @@
 <template>
   <div class="md:p-8 space-y-6 max-w-2xl mx-auto" v-if="suggestion">
-<!--    <header class="w-full flex justify-between items-center">-->
-<!--      <router-link :to="{name: 'suggestions-page'}" class="flex">-->
-<!--        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">-->
-<!--          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />-->
-<!--        </svg>-->
-<!--        Go back-->
-<!--      </router-link>-->
-<!--      <router-link :to="{name: 'update-suggestion', params: {suggestion_id: suggestion.id}}">-->
-<!--        <MyButton text="Edit suggestion" size="bg-my-blue text-white font-bold normal" />-->
-<!--      </router-link>-->
-<!--    </header>-->
+    <header class="w-full flex justify-between items-center">
+      <router-link :to="{name: 'suggestions-page'}" class="flex">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+        Go back
+      </router-link>
+      <router-link :to="{name: 'update-suggestion', params: {suggestion_id: suggestion.id}}">
+        <MyButton text="Edit suggestion" size="bg-my-blue text-white font-bold normal" />
+      </router-link>
+    </header>
     <SuggestionItem :suggestion="suggestion"/>
-    <PostComment />
-
+    <PostComment @refresh-comments="getComments" />
+    <div class="bg-white p-4 rounded-md space-y-4">
+      <ViewComment v-for="comment in suggestionComments" :key="comment.id" :comment-object="comment" />
+    </div>
   </div>
 </template>
 
@@ -25,9 +27,10 @@ import { Suggestion } from '@/types/suggestion'
 import SuggestionService from '@/services/suggestionService'
 import PostComment from '@/pages/Comments/componets/PostComment.vue'
 import CommentsService from '@/services/CommentsService'
+import ViewComment from '@/pages/Comments/componets/ViewComments.vue'
 
 @Component({
-  components: { PostComment, SuggestionItem, MyButton }
+  components: { PostComment, SuggestionItem, MyButton, ViewComment }
 })
 export default class CommentsPage extends Vue {
   public suggestionComments = [];
@@ -51,7 +54,7 @@ export default class CommentsPage extends Vue {
   public async getComments (): Promise<void> {
     try {
       const response = await CommentsService.getAllSuggestionComments(this.$route.params.suggestion_id)
-      this.suggestionComments = response.data
+      this.suggestionComments = response.data.comments
     } catch (e) {
       console.log({ e })
     }

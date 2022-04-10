@@ -108,7 +108,11 @@ export default class LoginComponent extends Vue {
   public async login (): Promise<void> {
     try {
       const userToken = await AuthService.authenticateUser(this.signupForm)
-      AuthStore.setAuthenticatedUserToken(userToken.data)
+      localStorage.setItem('token', userToken.data.token)
+
+      const authenticatedUser = await AuthService.getAuthenticatedUserInfo()
+      AuthStore.setAuthenticatedUser(authenticatedUser.data)
+
       this.$router.push({ name: 'suggestions-page' })
     } finally {}
   }
