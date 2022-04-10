@@ -1,6 +1,6 @@
 import { getModule, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import store from '@/store'
-
+import { AuthenticatedUser } from '@/types/authenticatedUser'
 @Module({
   namespaced: true,
   name: 'authStore',
@@ -9,7 +9,7 @@ import store from '@/store'
 })
 class AuthStore extends VuexModule {
   // TODO set user TYPE
-  public authenticatedUser: any | null = true;
+  public authenticatedUser: AuthenticatedUser | null = null;
   public authenticatedUserToken = '';
 
   get getAuthenticatedUser (): any {

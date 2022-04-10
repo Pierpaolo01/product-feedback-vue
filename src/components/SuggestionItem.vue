@@ -33,11 +33,11 @@ import { Suggestion } from '@/types/suggestion'
 @Component
 export default class SuggestionItem extends Vue {
   @Prop() readonly suggestion!: Suggestion;
-  @Prop( { default: () => true } ) readonly hasRoute!: boolean;
+  @Prop({ default: () => true }) readonly hasRoute!: boolean;
 
   public navigate (): void {
-    if (!this.hasRoute) return;
-    this.$router.push( { name: 'comments', params: { suggestion_id: String(this.suggestion.id) } } )
+    if (!this.hasRoute) return
+    this.$router.push({ name: 'comments', params: { suggestion_id: String(this.suggestion.id) } })
   }
 }
 </script>

@@ -6,7 +6,7 @@ import AuthStore from '@/store/modules/AuthStore'
 import CreateSuggestion from '@/pages/CreateSuggestion/CreateSuggestion.vue'
 import UpdateSuggestion from '@/pages/CreateSuggestion/UpdateSuggestion.vue'
 import CommentsPage from '@/pages/Comments/CommentsPage.vue'
-import authService from "@/services/authService"
+import authService from '@/services/authService'
 
 Vue.use(VueRouter)
 
@@ -64,16 +64,14 @@ const router = new VueRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  const authenticatedUserToken = AuthStore.getAuthenticatedUserToken
+  const authenticatedUserToken = localStorage.getItem('token')
   const requiresAuthentication = to.matched.some((match) => match.meta.requiresAuth)
 
   try {
-
-    const authenticatedUser = authService.getAuthenticatedUserInfo();
-    AuthStore.setAuthenticatedUser(authenticatedUser)
-    
+    const authenticatedUser = await authService.getAuthenticatedUserInfo()
+    AuthStore.setAuthenticatedUser(authenticatedUser.data)
   } catch (e) {
-
+    // next({ name: 'auth' })
   }
 
   if (!authenticatedUserToken && requiresAuthentication) next({ name: 'auth' })
