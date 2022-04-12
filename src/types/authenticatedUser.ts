@@ -3,4 +3,5 @@ export interface AuthenticatedUser {
   name: string;
   avatarUurl: string;
   permissions: string[];
+  userId: number;
 }

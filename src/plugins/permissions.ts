@@ -3,9 +3,13 @@ import AuthStore from '@/store/modules/AuthStore'
 
 const permissionsCheck = {
   install (Vue: VueConstructor) {
-    Vue.prototype.$can = function (requiredPermission: string) {
+    Vue.prototype.$can = function (requiredPermission: string, contentUserId?: number) {
       if (AuthStore.getAuthenticatedUser) {
-        return !!AuthStore.getAuthenticatedUser.permissions.find((permission: string) => permission === requiredPermission)
+        const userId = AuthStore.getAuthenticatedUser.id
+
+        const contentBelongsToUser = userId === contentUserId
+        console.log(contentUserId)
+        return contentBelongsToUser || !!AuthStore.getAuthenticatedUser.permissions.find((permission: string) => permission === requiredPermission)
       }
       return false
     }
