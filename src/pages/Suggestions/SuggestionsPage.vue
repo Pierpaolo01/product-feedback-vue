@@ -37,7 +37,7 @@ import { Suggestion } from '@/types/suggestion'
   }
 })
 export default class SuggestionsPage extends Vue {
-  public suggestions: Suggestion[] | null = null;
+  public suggestions: Suggestion[] = [];
 
   public created (): void {
     this.fetchAllSuggestions()

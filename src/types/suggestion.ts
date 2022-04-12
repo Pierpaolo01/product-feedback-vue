@@ -5,4 +5,5 @@ export interface Suggestion {
   description: string;
   comments: string;
   likes: number;
+  userId: number;
 }

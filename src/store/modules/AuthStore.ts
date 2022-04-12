@@ -12,7 +12,7 @@ class AuthStore extends VuexModule {
   public authenticatedUser: AuthenticatedUser | null = null;
   public authenticatedUserToken = '';
 
-  get getAuthenticatedUser (): any {
+  get getAuthenticatedUser (): AuthenticatedUser | null {
     return this.authenticatedUser
   }
 
@@ -21,7 +21,7 @@ class AuthStore extends VuexModule {
   }
 
   @Mutation
-  setAuthenticatedUser (user: any) {
+  setAuthenticatedUser (user: AuthenticatedUser) {
     this.authenticatedUser = user
   }
 

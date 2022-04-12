@@ -63,16 +63,23 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach((to, from, next) => {
   const authenticatedUserToken = localStorage.getItem('token')
   const requiresAuthentication = to.matched.some((match) => match.meta.requiresAuth)
 
-  try {
-    const authenticatedUser = await authService.getAuthenticatedUserInfo()
-    AuthStore.setAuthenticatedUser(authenticatedUser.data)
-  } catch (e) {
-    // next({ name: 'auth' })
-  }
+  let authenticatedUser
+  authService.getAuthenticatedUserInfo()
+    .then((res) => {
+      authenticatedUser = res.data.data
+      AuthStore.setAuthenticatedUser(authenticatedUser)
+      next()
+    })
+    .catch(() => {
+      console.log('something went wrong')
+      next({ name: 'auth' })
+    })
+
+  // if (!authenticatedUser) next({ name: 'auth' })
 
   if (!authenticatedUserToken && requiresAuthentication) next({ name: 'auth' })
 

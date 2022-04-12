@@ -1,6 +1,7 @@
 import axios, { AxiosPromise } from 'axios'
 import { CreateSuggestionForm } from '@/types/createSuggestion'
 import { Suggestion } from '@/types/suggestion'
+import { ApiResponse } from '@/types/apiResponse'
 
 export default class SuggestionService {
   public static getAllSuggestions (category = ''): AxiosPromise<Suggestion[]> {
@@ -9,8 +10,7 @@ export default class SuggestionService {
     })
   }
 
-  public static getSuggestion (id: string | number):AxiosPromise<Suggestion> {
-    console.log(id)
+  public static getSuggestion (id: string | number):AxiosPromise<ApiResponse<Suggestion>> {
     return axios.get(`/api/suggestion/${id}`)
   }
 

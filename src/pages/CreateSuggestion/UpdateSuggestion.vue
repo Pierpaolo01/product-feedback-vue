@@ -58,7 +58,7 @@ export default class UpdateSuggestion extends Vue {
   public async created (): Promise<void> {
     try {
       const response = await SuggestionService.getSuggestion(this.$route.params.suggestion_id)
-      this.suggestion = response.data
+      this.suggestion = response.data.data
     } finally {
     }
   }
@@ -66,6 +66,7 @@ export default class UpdateSuggestion extends Vue {
   public async updateSuggestion (): Promise<void> {
     if (!this.suggestion) return
     try {
+      console.log(this.suggestion)
       await SuggestionService.updateSuggestion(this.suggestion)
 
       this.$notify({

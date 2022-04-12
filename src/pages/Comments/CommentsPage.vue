@@ -7,14 +7,14 @@
         </svg>
         Go back
       </router-link>
-      <router-link :to="{name: 'update-suggestion', params: {suggestion_id: suggestion.id}}">
-        <MyButton text="Edit suggestion" size="bg-my-blue text-white font-bold normal" />
+      <router-link v-if="$can('UPDATE_ANY_SUGGESTION')" :to="{name: 'update-suggestion', params: {suggestion_id: suggestion.id }}">
+        <MyButton  text="Edit suggestion" size="bg-my-blue text-white font-bold normal" />
       </router-link>
     </header>
     <SuggestionItem :suggestion="suggestion"/>
     <PostComment @refresh-comments="getComments" />
     <div class="bg-white p-4 rounded-md space-y-4">
-      <ViewComment v-for="comment in suggestionComments" :key="comment.id" :comment-object="comment" />
+<!--      <ViewComment v-for="comment in suggestionComments" :key="comment.id" :comment-object="comment" />-->
     </div>
   </div>
 </template>
@@ -24,11 +24,14 @@ import { Component, Vue } from 'vue-property-decorator'
 import MyButton from '@/components/MyButton.vue'
 import SuggestionItem from '@/components/SuggestionItem.vue'
 import { Suggestion } from '@/types/suggestion'
+import { AuthenticatedUser } from '@/types/authenticatedUser'
 import SuggestionService from '@/services/suggestionService'
 import PostComment from '@/pages/Comments/componets/PostComment.vue'
 import CommentsService from '@/services/CommentsService'
 import ViewComment from '@/pages/Comments/componets/ViewComments.vue'
+import { namespace } from 'vuex-class'
 
+const authStore = namespace('authStore')
 @Component({
   components: { PostComment, SuggestionItem, MyButton, ViewComment }
 })
@@ -36,6 +39,9 @@ export default class CommentsPage extends Vue {
   public suggestionComments = [];
 
   public suggestion: Suggestion | null = null
+
+  @authStore.Getter
+  public getAuthenticatedUser: AuthenticatedUser;
 
   public created (): void {
     this.getSuggestion()
@@ -45,7 +51,7 @@ export default class CommentsPage extends Vue {
   public async getSuggestion (): Promise<void> {
     try {
       const response = await SuggestionService.getSuggestion(this.$route.params.suggestion_id)
-      this.suggestion = response.data
+      this.suggestion = response.data.data
     } catch (e) {
       console.log(e)
     }
@@ -54,7 +60,7 @@ export default class CommentsPage extends Vue {
   public async getComments (): Promise<void> {
     try {
       const response = await CommentsService.getAllSuggestionComments(this.$route.params.suggestion_id)
-      this.suggestionComments = response.data.comments
+      this.suggestionComments = response.data.data
     } catch (e) {
       console.log({ e })
     }
