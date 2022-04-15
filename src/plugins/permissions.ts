@@ -9,7 +9,7 @@ const permissionsCheck = {
 
         const contentBelongsToUser = userId === contentUserId
         console.log(contentUserId)
-        return contentBelongsToUser || !!AuthStore.getAuthenticatedUser.permissions.find((permission: string) => permission === requiredPermission)
+        return contentBelongsToUser || !!AuthStore.getAuthenticatedUser.permissions.includes(requiredPermission)
       }
       return false
     }

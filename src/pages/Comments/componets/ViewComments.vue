@@ -10,7 +10,7 @@
           </div>
           <div>
             <button class="text-blue-400 underline items-end mr-6">reply</button>
-            <button v-if="authenticatedUser.id === commentObject.user.id" class="text-red-400">DELETE</button>
+            <button v-if="authenticatedUser.id === commentObject.user.id || $can('DELETE_ANY_COMMENT')" @click="deleteComment(commentObject)" class="text-red-400">DELETE</button>
           </div>
         </div>
           <p class="block w-full py-3 border-0 resize-none focus:ring-0 sm:text-sm">
@@ -25,6 +25,7 @@
 <script lang="ts">
 import { Component, Vue, Emit, Prop } from 'vue-property-decorator'
 import AuthStore from '@/store/modules/AuthStore'
+import CommentsStore from '@/services/CommentsService'
 
 @Component
 export default class ViewComments extends Vue {
@@ -34,6 +35,15 @@ export default class ViewComments extends Vue {
 
   public async submitReply (): Promise<void> {
     //
+  }
+
+  public async deleteComment ({ id }) {
+    try {
+      await CommentsStore.deleteComment(this.$route.params.suggestion_id, id)
+      this.refreshComments()
+    } finally {
+
+    }
   }
 
   @Emit()

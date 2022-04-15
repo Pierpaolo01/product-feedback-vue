@@ -7,14 +7,14 @@
         </svg>
         Go back
       </router-link>
-      <router-link  :to="{name: 'update-suggestion', params: {suggestion_id: suggestion.id }}">
+      <router-link v-if="$can('UPDATE_ANY_SUGGESTION', suggestion.userId)" :to="{name: 'update-suggestion', params: {suggestion_id: suggestion.id }}">
         <MyButton  text="Edit suggestion" size="bg-my-blue text-white font-bold normal" />
       </router-link>
     </header>
     <SuggestionItem :suggestion="suggestion"/>
     <PostComment @refresh-comments="getComments" />
     <div class="bg-white p-4 rounded-md space-y-4">
-      <ViewComment v-for="comment in suggestionComments" :key="comment.id" :comment-object="comment" />
+      <ViewComment v-for="comment in suggestionComments" :key="comment.id" :comment-object="comment" @refresh-comments="getComments" />
     </div>
   </div>
 </template>
