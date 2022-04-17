@@ -10,7 +10,7 @@
           </div>
         </div>
         <div>
-          <button class="text-blue-400 underline items-end mr-6" @click="showReplies = !showReplies">reply</button>
+          <button class="text-blue-400 underline items-end mr-6" @click="showReplies = !showReplies" v-if="hasNestedReplies">reply</button>
           <button v-if="authenticatedUser.id === commentObject.user.id || $can('DELETE_ANY_COMMENT')" @click="deleteComment(commentObject)" class="text-red-400">DELETE</button>
         </div>
       </div>
@@ -18,11 +18,11 @@
         {{ commentObject.comment || commentObject.reply }}
       </p>
     </div>
-    <div v-if="showReplies" class="space-y-4 p-4 bg-gray-100 rounded-md">
+    <div class="space-y-4 p-4 bg-gray-100 rounded-md" v-if="hasNestedReplies">
       <div v-for="reply in replies" :key="reply.id">
-        <ViewComments :comment-object="reply"/>
+        <ViewComments :comment-object="reply" :has-nested-replies="false"/>
       </div>
-      <PostComment mode="reply" :comment-id="commentObject.id" @refresh-comments="getReplies"/>
+      <PostComment v-if="showReplies" mode="reply" :comment-id="commentObject.id" @refresh-comments="getReplies"/>
     </div>
   </div>
 </template>
@@ -37,6 +37,7 @@ import PostComment from '@/pages/Comments/componets/PostComment.vue'
 @Component({ components: { PostComment } })
 export default class ViewComments extends Vue {
   @Prop() readonly commentObject!: Comment;
+  @Prop({ default: () => true }) readonly hasNestedReplies: boolean
 
   public authenticatedUser = AuthStore.getAuthenticatedUser;
 
