@@ -22,4 +22,8 @@ export default class CommentService {
   public static createCommentReply (commentId: string | number, reply: string): AxiosPromise<ApiResponse<Comment>> {
     return axios.post(`/api/comment/${commentId}/replies`, { reply })
   }
+
+  public static deleteReply (replyId: string | number): AxiosPromise {
+    return axios.delete(`/api/comment/reply/${replyId}`)
+  }
 }

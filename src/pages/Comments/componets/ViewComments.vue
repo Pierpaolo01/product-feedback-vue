@@ -11,7 +11,7 @@
         </div>
         <div>
           <button class="text-blue-400 underline items-end mr-6" @click="showReplies = !showReplies" v-if="hasNestedReplies">reply</button>
-          <button v-if="authenticatedUser.id === commentObject.user.id || $can('DELETE_ANY_COMMENT')" @click="deleteComment(commentObject)" class="text-red-400">DELETE</button>
+          <button v-if="authenticatedUser.id === commentObject.user.id || $can('DELETE_ANY_COMMENT')" @click="deleteHandler()" class="text-red-400">DELETE</button>
         </div>
       </div>
       <p class="block w-full py-3 border-0 resize-none focus:ring-0 sm:text-sm">
@@ -20,7 +20,7 @@
     </div>
     <div class="space-y-4 p-4 bg-gray-100 rounded-md" v-if="hasNestedReplies">
       <div v-for="reply in replies" :key="reply.id">
-        <ViewComments :comment-object="reply" :has-nested-replies="false"/>
+        <ViewComments :comment-object="reply" :has-nested-replies="false" @refresh-comments="getReplies"/>
       </div>
       <PostComment v-if="showReplies" mode="reply" :comment-id="commentObject.id" @refresh-comments="getReplies"/>
     </div>
@@ -62,12 +62,33 @@ export default class ViewComments extends Vue {
     //
   }
 
-  public async deleteComment ({ id }) {
+  public deleteHandler (): void {
+    if (this.hasNestedReplies) {
+      this.deleteComment()
+      return
+    }
+    this.deleteReply()
+  }
+
+  public async deleteComment () {
+    const { id } = this.commentObject
+
     try {
       await CommentsService.deleteComment(this.$route.params.suggestion_id, id)
-      this.refreshComments()
     } finally {
+      this.refreshComments()
+    }
+  }
 
+  public async deleteReply (): Promise<void> {
+    const commentId = this.commentObject.id
+
+    try {
+      await CommentsService.deleteReply(commentId)
+    } catch (e) {
+      console.log(e)
+    } finally {
+      this.refreshComments()
     }
   }
 
