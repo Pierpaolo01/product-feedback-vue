@@ -15,7 +15,11 @@ export default class CommentService {
     return axios.delete(`/api/suggestion/${suggestionId}/comment/${commentId}`)
   }
 
-  public static getAllCommentReplies (suggestionId: string | number, commentId: string | number): AxiosPromise<ApiResponse<Comment[]>> {
+  public static getAllCommentReplies (commentId: string | number): AxiosPromise<ApiResponse<Comment[]>> {
     return axios.get(`/api/comment/${commentId}/replies`)
+  }
+
+  public static createCommentReply (commentId: string | number, reply: string): AxiosPromise<ApiResponse<Comment>> {
+    return axios.post(`/api/comment/${commentId}/replies`, { reply })
   }
 }

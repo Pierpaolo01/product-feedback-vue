@@ -13,7 +13,7 @@
     </header>
     <SuggestionItem :suggestion="suggestion"/>
     <PostComment @refresh-comments="getComments" />
-    <div class="bg-white p-4 rounded-md space-y-4">
+    <div class="bg-white p-4 rounded-md space-y-4" v-if="suggestionComments">
       <ViewComment v-for="comment in suggestionComments" :key="comment.id" :comment-object="comment" @refresh-comments="getComments" />
     </div>
   </div>
