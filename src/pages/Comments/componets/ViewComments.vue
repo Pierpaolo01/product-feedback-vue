@@ -9,29 +9,46 @@
             </div>
           </div>
           <div>
-            <button class="text-blue-400 underline items-end mr-6">reply</button>
+            <button class="text-blue-400 underline items-end mr-6" @click="showReplies = !showReplies">reply</button>
             <button v-if="authenticatedUser.id === commentObject.user.id || $can('DELETE_ANY_COMMENT')" @click="deleteComment(commentObject)" class="text-red-400">DELETE</button>
           </div>
         </div>
           <p class="block w-full py-3 border-0 resize-none focus:ring-0 sm:text-sm">
             {{ commentObject.comment }}
           </p>
-        <div class="float-left">
-          replies
+        <div v-if="showReplies">
+          <div v-for="reply in replies" :key="reply.id">
+            <ViewComments :comment-object="reply"/>
+          </div>
         </div>
+
       </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Emit, Prop } from 'vue-property-decorator'
 import AuthStore from '@/store/modules/AuthStore'
-import CommentsStore from '@/services/CommentsService'
+import CommentsService from '@/services/CommentsService'
+import Comment from '@/types/comment'
 
 @Component
 export default class ViewComments extends Vue {
-  @Prop() readonly commentObject!: any;
+  @Prop() readonly commentObject!: Comment;
 
   public authenticatedUser = AuthStore.getAuthenticatedUser;
+
+  public replies: Comment[] = [];
+
+  public showReplies = false;
+
+  public async getReplies (): Promise<void> {
+    try {
+      const response = await CommentsService.getAllCommentReplies()
+      this.replies = response.data.data
+    } finally {
+      //
+    }
+  }
 
   public async submitReply (): Promise<void> {
     //
@@ -39,7 +56,7 @@ export default class ViewComments extends Vue {
 
   public async deleteComment ({ id }) {
     try {
-      await CommentsStore.deleteComment(this.$route.params.suggestion_id, id)
+      await CommentsService.deleteComment(this.$route.params.suggestion_id, id)
       this.refreshComments()
     } finally {
 

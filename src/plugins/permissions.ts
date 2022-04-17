@@ -8,23 +8,10 @@ const permissionsCheck = {
         const userId = AuthStore.getAuthenticatedUser.id
 
         const contentBelongsToUser = userId === contentUserId
-        console.log(contentUserId)
         return contentBelongsToUser || !!AuthStore.getAuthenticatedUser.permissions.includes(requiredPermission)
       }
       return false
     }
   }
 }
-
-// {
-// install (Vue: VueConstructor) {
-//   Vue.prototype.can = function (requiredPermission: string) {
-//     if (AuthStore.getAuthenticatedUser) {
-//       console.log(AuthStore.getAuthenticatedUser.permissions.find((permission: string) => permission === requiredPermission))
-//       return AuthStore.getAuthenticatedUser.permissions.find((permission: string) => permission === requiredPermission)
-//     }
-//     return false
-//   }
-// }
-// }
 export default permissionsCheck
